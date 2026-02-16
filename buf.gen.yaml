@@ -14,4 +14,4 @@ managed:
       value: moonshine-server/gen
   disable:
     - file_option: go_package
-      module: buf.build/bufbuild/protovalidate
+      path: proto/third_party
