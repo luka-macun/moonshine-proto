@@ -1,8 +1,0 @@
-{
-  "protoc": {
-    "options": [
-      "--proto_path=${workspaceRoot}/proto",
-      "--proto_path=${env.HOME}/.cache/buf/v3/modules/b5/buf.build/bufbuild/protovalidate/80ab13bee0bf4272b6161a72bf7034e0/files"
-    ]
-  }
-}
