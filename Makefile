@@ -2,9 +2,13 @@
 
 # Generate protobuf and ConnectRPC code
 generate:
-	buf dep update
 	buf lint
 	buf generate
+
+# Lint protos and check for backward-incompatible changes against main branch
+lint:
+	buf lint
+	buf breaking --against '.git#branch=main'
 
 # Run the server
 run:
