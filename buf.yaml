@@ -1,16 +1,11 @@
 version: v2
 modules:
   - path: proto
-    excludes:
-      - proto/third_party
-  - path: proto/third_party
+deps:
+  - buf.build/bufbuild/protovalidate
 lint:
   use:
     - STANDARD
-  ignore:
-    - proto/third_party
 breaking:
   use:
     - FILE
-  ignore:
-    - proto/third_party
