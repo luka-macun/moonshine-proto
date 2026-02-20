@@ -10,6 +10,8 @@ service UserService {
   rpc GetUser(GetUserRequest) returns (GetUserResponse) {}
   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
   rpc ListUsers(ListUsersRequest) returns (ListUsersResponse) {}
+  // StreamPresence opens a server-streaming connection for real-time presence changes.
+  rpc StreamPresence(StreamPresenceRequest) returns (stream StreamPresenceResponse) {}
 }
 
 message User {
@@ -42,4 +44,12 @@ message ListUsersRequest {}
 
 message ListUsersResponse {
   repeated User users = 1;
+}
+
+message StreamPresenceRequest {}
+
+message StreamPresenceResponse {
+  string user_id = 1;
+  string username = 2;
+  bool online = 3;
 }
