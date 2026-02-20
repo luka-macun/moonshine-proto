@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package moonshine.v1;
+
+// ServerService provides server metadata and health checks.
+service ServerService {
+  rpc GetVersion(GetVersionRequest) returns (GetVersionResponse) {}
+  rpc HealthCheck(HealthCheckRequest) returns (HealthCheckResponse) {}
+}
+
+message GetVersionRequest {}
+
+message GetVersionResponse {
+  string version = 1;
+}
+
+message HealthCheckRequest {}
+
+message HealthCheckResponse {
+  string status = 1;
+}
