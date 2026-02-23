@@ -12,6 +12,10 @@ service ChannelService {
   rpc ListChannels(ListChannelsRequest) returns (ListChannelsResponse) {}
   rpc UpdateChannel(UpdateChannelRequest) returns (UpdateChannelResponse) {}
   rpc DeleteChannel(DeleteChannelRequest) returns (DeleteChannelResponse) {}
+
+  // Direct and Group Messaging
+  rpc GetOrCreateDirectChannel(GetOrCreateDirectChannelRequest) returns (GetOrCreateDirectChannelResponse) {}
+  rpc CreateGroupChannel(CreateGroupChannelRequest) returns (CreateGroupChannelResponse) {}
 }
 
 message Channel {
@@ -20,6 +24,8 @@ message Channel {
   string description = 3;
   string created_by = 4;
   google.protobuf.Timestamp created_at = 5;
+  // Type is either PUBLIC, DIRECT, or GROUP
+  string type = 6;
 }
 
 message CreateChannelRequest {
@@ -60,3 +66,28 @@ message DeleteChannelRequest {
 }
 
 message DeleteChannelResponse {}
+
+message GetOrCreateDirectChannelRequest {
+  string other_user_id = 1 [(buf.validate.field).string.uuid = true];
+}
+
+message GetOrCreateDirectChannelResponse {
+  Channel channel = 1;
+}
+
+message CreateGroupChannelRequest {
+  // Optional name for the group chat.
+  optional string name = 1 [(buf.validate.field).string = {max_len: 100}];
+  // The UUIDs of the users to add to the group.
+  repeated string user_ids = 2 [(buf.validate.field).repeated = {
+    min_items: 2,
+    max_items: 50,
+    items: {
+      string: { uuid: true }
+    }
+  }];
+}
+
+message CreateGroupChannelResponse {
+  Channel channel = 1;
+}
