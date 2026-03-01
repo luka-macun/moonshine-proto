@@ -3,6 +3,7 @@ syntax = "proto3";
 package moonshine.v1;
 
 import "buf/validate/validate.proto";
+import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 
 // UserService manages user profiles.
@@ -14,6 +15,12 @@ service UserService {
   rpc StreamPresence(StreamPresenceRequest) returns (stream StreamPresenceResponse) {}
 }
 
+enum UserType {
+  USER_TYPE_UNSPECIFIED = 0;
+  USER_TYPE_HUMAN = 1;
+  USER_TYPE_AGENT = 2;
+}
+
 message User {
   string id = 1;
   string username = 2;
@@ -21,6 +28,8 @@ message User {
   string avatar_url = 4;
   bool online = 5;
   google.protobuf.Timestamp created_at = 6;
+  UserType type = 7;
+  google.protobuf.Struct agent_config = 8;
 }
 
 message GetUserRequest {

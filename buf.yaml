@@ -1,6 +1,7 @@
 version: v2
 modules:
-  - path: proto
+  - path: .
+    name: buf.build/moonshine/moonshine
 deps:
   - buf.build/bufbuild/protovalidate
 lint:
